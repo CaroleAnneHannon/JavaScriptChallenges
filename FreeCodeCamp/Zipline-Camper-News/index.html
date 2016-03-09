@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"/>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+
+    </head>
+    <body>
+        <h1>Camper News</h1>
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div id="FCCNews" ></div>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+</html>
+
+
+<script src="2.1.3.jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="NewsReaderEngine.js"></script>
+
+<script>
+$(document).ready(function(){
+});
+
+var jsondata;
+$.getJSON("http://www.freecodecamp.com/news/hot",function(json){
+    jsondata = json;
+})
+.done(function()
+{
+    var getNewsHTML = function(newsItem)
+    {
+        var html = '<div class="col-xs-12 col-sm-6 col-md-4">'
+        +'<div class="FCCNews">'
+            +'<div class="info">'
+            +' <a href="'+newsItem.getURL()+'"> Original<i class="fa fa-external-link-square"></i></a>' 
+            +'</div>'
+            +'<div class="title">'            
+            +' <a href="'+newsItem.getFCCURL()+'">'
+                +newsItem.getTitle(70)
+            +'</a>'
+            +'</div>'
+            +'<div><i class="fa fa-thumbs-o-up"></i>'+newsItem.getUpvotes()+'</div>'
+        +'</div>'
+        +'</div>'
+        return html;
+    }
+
+    var createNews = function(newsItems)
+    {
+        var html = "";
+        newsItems.forEach(function(e){
+            html += getNewsHTML(e);
+        });
+        
+        $("#FCCNews").html(html);
+    
+    }
+    
+    
+    
+    //calls the NewsReaderEngine to convert API object to a simpler object to handle that has just the fields we need
+    var fcc = new FCCNews(jsondata);
+    createNews(fcc.news);
+});
+</script>

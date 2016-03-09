@@ -1,0 +1,104 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    </head>
+    <body>
+        <div class="container text-center">
+            <h1 class="page-header">Final Fantasy IX</h1>
+            <div class="opaque">
+                <div class="text">
+                    <button class="btn btn-primary" id="quote-button">FF9-Quote me!</button>
+                    <p id="generated-quote"></p>
+                    <p id="quote-author"></p>
+                    <p id="share-quote"></p>
+                    <a href="" id="tweet-link" target="_blank">
+                        <button class="btn btn-info" id="tweet-quote">Tweet<i class="fa fa-twitter"></i></button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <p id="debug"></p>     
+    
+    </body>
+</html>
+
+
+<script src="2.1.3.jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<script>
+    /* readies the document to use the Quote Generator*/
+    $(document).ready(function()
+                    {
+    $("#tweet-quote").hide();
+    quoteGenerator();});
+
+    /*sets the quote-button id as a clickable button that will call the getDifferentQuote function*/
+    function quoteGenerator() {
+    $("#quote-button").click(
+        function() {
+        var quote = getDifferentQuote();
+        $("#generated-quote").html(quote[0]);
+        $("#quote-author").html(quote[1]);
+        $("#tweet-quote").show();
+        $("#tweet-link").attr("href","https://twitter.com/intent/tweet?text="+encodeURIComponent('"'+quote[0]+'" - '+quote[1]));
+        });
+    }
+
+
+    /* Provides a random quote
+    Also checks that the new quote is not the same as the old quote */
+    function getDifferentQuote() {
+    var oldQuote = $("#generated-quote").text();
+    var newQuote = oldQuote;
+    var listOfQuotes = getQuotes();
+    var author = "";
+
+    if (listOfQuotes.length === 1) {
+        newQuote = listOfQuotes[0][0];
+        author = listOfQuotes[0][1];
+    }
+
+    while (newQuote === oldQuote && listOfQuotes.length > 1) {
+        var randomNumber = Math.floor(Math.random() * listOfQuotes.length);
+        newQuote = listOfQuotes[randomNumber][0];
+        author = listOfQuotes[randomNumber][1];
+    }
+
+    return [newQuote,author];
+    }
+
+    /*returns list of quotes
+    I didn't want them making the code longer*/
+    function getQuotes() {
+    return quotes = [
+        ["How do you prove that you exist...? Maybe we don't exist..","Vivi"],
+        ["I-I haven't hurt anyone.","Vivi"],
+        ["I have to find out who I am... I'm scared... What if I'm not even human...?","Vivi"],
+        ["Oh, I get real clingy when I'm sad!","Zidane"],
+        ["Someday I will be queen, but I will always be myself.","Garnet"],
+        ["Having sworn fealty, must I spend my life in servitude?","Steiner"],
+        ["I do what I want! You have problem!?","Quina"],
+        ["To be forgotten is worse than death","Freya"],
+        ["We live not to forget out past, but to learn from it!","Freya"],
+        ["The answer you seek may forever change your life for the worse.","Freya"],
+        ["I don't wanna be alone anymore...","Eiko"],
+        ["The only dependable thing about the future is uncertainty.","Amarant"],
+        ["You have to find the answer yourself. It'll be hard, but you can do it. Zidane"],
+        ["Through our memories, future generations will see that we can overcome any fear!","Zidane"],
+        ["I'm not here to help. I just want it to be fair.","Amarant"],
+        ["I find this rain quite pleasant. It is as if the raindrops are blessing our victory.","Kuja"],
+        ["We're all just blindly following orders. My heart and my will mean nothing...","Beatrix"],
+        ["My allegiance to you remains the same, if not stronger.","Beatrix"],
+        ["Listen to me. You should never lie to yourself.","Eiko"],
+        ["Why you care about small things? World very simple place. World only have two things: Things you can eat and things you no can eat.","Quina"],
+        ["You already know what it means to live...and to die. You're asking about our friends who have 'died,' not 'stopped.'","Black Mage no. 288"],
+        ["Why defy your fate? Is the will to live that powerful...?","Necron"],
+        ["Peace is but a shadow of death, desperate to forget its painful past","Kuja"],
+        ["I don't look for trouble, but if trouble finds me, I have no choice but to fight back.","Amarant"]
+        ];
+    }
+</script>

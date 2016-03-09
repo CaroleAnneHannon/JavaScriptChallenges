@@ -1,0 +1,78 @@
+body {
+  background-color: #DBDBD5;
+}
+
+h1{
+    text-align:center;
+    color: darkblue;
+}
+
+.content{
+    background-color: #DBDBD5;
+    margin-left:20px;
+    margin-right:20px;
+    height:100vh;
+}
+
+.container-fluid{    
+    background-color: #DBDBD5;
+}
+
+.FCCNews {
+  color: black;
+  width: 250px;
+  border-radius: 5px 25px 25px 25px;
+  box-shadow: inset 1px 1px 100px 5px lightblue;
+  box-sizing: border-box;
+  padding: 15px;
+  margin: auto;
+  margin-top:5px;
+  margin-bottom:5px;
+  min-height:200px;
+}
+
+.title {
+  font-family: 'Open Sans', sans-serif;
+  text-shadow: 2px 2px 5px #DBDBD5;
+  font-size:1.2em;
+  height:80px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.info {
+  background-color: darkblue;
+    border-radius: 25px;
+    color: #DBDBD5;
+  opacity:1;
+  text-align: center;
+  font-size:1.5em;
+  font-weight:bolder;
+  margin-top:5px;
+}
+
+.info a{
+    color: #DBDBD5;
+}
+
+.info a:hover{
+    color:white;
+}
+
+
+@media screen and (min-width: 768px) {
+    body {
+        background-color: steelblue;
+    }
+    
+    .content{
+    margin-left:10%;
+    margin-right:10%;
+        
+    }
+    
+    h1{
+        color:#DBDBD5
+    }
+}
+
